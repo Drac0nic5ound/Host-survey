@@ -1,0 +1,25 @@
+#System information
+
+Get-date #date information
+Get-timezone #timezone information
+Get-CimInstance -class cim_operatingsystem | Select-Object caption, csname #OS information, and hostname
+Get-WmiObject -class win32_product | Select-Object -property installdate, name | Sort-Object -property installdate -Descending #recently installed applications
+Get-Itemproperty HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object -property name, installdate | sort-object -property installdate -descending #64 bit recent applications installed 
+Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object -property name, installdate | sort-object -property installdate -descending #32 bit recent applications installed
+Get-LocalUser | Select-Object Name,Enabled,SID,Lastlogon | sort-object -Descending #view local user login history
+Get-LocalGroupMember -group "administrators" #view admin group users
+Get-NetIPInterface #view interface information
+Get-NetTCPConnection #view network connections
+Get-Content $env:SystemRoot\System32\Drivers\etc\hosts #view hosts file information
+Get-CimInstance win32_process | select-object processid,parentprocessid,commandline #show processes with pid
+Get-WmiObject -Class Win32_Service | Select-Object name, pathname #show services with path
+get-scheduledtask | where state -EQ 'ready' #recently run tasks.
+Get-ScheduledTask -TaskName * | Get-ScheduledTaskInfo #recent tasks and info
+Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\* | select pschildname #view registry keys
+Get-ChildItem -Path "\\.\pipe\" -Filter '*pshost*' |
+ForEach-Object {
+    Get-Process -Id $_.Name.Split('.')[2] 
+}  #view named pipes 
+cd C:\Users\username\AppData\Local\Temp #to view temp folder type: ls
+
+| Add-Content -Path 'C:\Users\Liam\Desktop\Tuesday survey.txt.txt' #output text to a text doc. 
