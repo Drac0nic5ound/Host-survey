@@ -20,6 +20,6 @@ Get-ChildItem -Path "\\.\pipe\" -Filter '*pshost*' |
 ForEach-Object {
     Get-Process -Id $_.Name.Split('.')[2] 
 }  #view named pipes 
-cd C:\Users\username\AppData\Local\Temp #to view temp folder type: ls
+# cd C:\Users\username\AppData\Local\Temp (to view temp folder type: ls)
 
-| Add-Content -Path 'C:\Users\Liam\Desktop\Tuesday survey.txt.txt' #output text to a text doc. 
+# | Add-Content -Path 'C:\Users\Liam\Desktop\Tuesday survey.txt.txt'
